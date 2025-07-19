@@ -1,11 +1,15 @@
 
 import adtm.DBConnection;
+import java.awt.Dimension;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -48,15 +52,17 @@ public class ATMMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblWelcome = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
         btnCheck = new javax.swing.JButton();
         btnDeposit = new javax.swing.JButton();
         btnWithdraw = new javax.swing.JButton();
         btnLogout = new javax.swing.JButton();
+        lblWelcome = new javax.swing.JLabel();
+        btnViewHistoryLogs = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblWelcome.setText("jLabel1");
+        jPanel1.setBackground(new java.awt.Color(51, 51, 255));
 
         btnCheck.setText("Check Balance");
         btnCheck.addActionListener(new java.awt.event.ActionListener() {
@@ -86,36 +92,67 @@ public class ATMMenu extends javax.swing.JFrame {
             }
         });
 
+        lblWelcome.setFont(new java.awt.Font("Lucida Fax", 1, 36)); // NOI18N
+        lblWelcome.setText("jLabel1");
+
+        btnViewHistoryLogs.setText("History Logs");
+        btnViewHistoryLogs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewHistoryLogsActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(359, 359, 359)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnViewHistoryLogs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnWithdraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDeposit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCheck, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(186, Short.MAX_VALUE)
+                .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60)
+                .addComponent(btnCheck, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDeposit, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnWithdraw, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(btnViewHistoryLogs, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(141, 141, 141)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblWelcome, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnCheck)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnDeposit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnWithdraw, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(150, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(lblWelcome)
-                .addGap(31, 31, 31)
-                .addComponent(btnCheck)
-                .addGap(18, 18, 18)
-                .addComponent(btnDeposit)
-                .addGap(18, 18, 18)
-                .addComponent(btnWithdraw)
-                .addGap(18, 18, 18)
-                .addComponent(btnLogout)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -149,12 +186,10 @@ public class ATMMenu extends javax.swing.JFrame {
        String amtStr = JOptionPane.showInputDialog(this, "Enter deposit amount:");
 
         if (amtStr == null) {
-            // User pressed Cancel
             JOptionPane.showMessageDialog(this, "Deposit cancelled.");
             return;
         }
 
-        // ✅ Now safe to trim because it's not null
         amtStr = amtStr.trim();
 
         if (amtStr.isEmpty()) {
@@ -171,10 +206,24 @@ public class ATMMenu extends javax.swing.JFrame {
             }
 
             try (Connection con = DBConnection.connect()) {
-                PreparedStatement ps = con.prepareStatement("UPDATE accounts SET balance = balance + ? WHERE id = ?");
-                ps.setDouble(1, amount);
-                ps.setInt(2, userId);
-                ps.executeUpdate();
+                con.setAutoCommit(false); // Optional: Begin transaction
+
+                // 1. Update balance
+                PreparedStatement ps1 = con.prepareStatement("UPDATE accounts SET balance = balance + ? WHERE id = ?");
+                ps1.setDouble(1, amount);
+                ps1.setInt(2, userId);
+                ps1.executeUpdate();
+
+                // 2. Insert into history_logs
+                PreparedStatement ps2 = con.prepareStatement(
+                    "INSERT INTO history_logs (history_acc_id, history_type, history_change_ammount) VALUES (?, ?, ?)"
+                );
+                ps2.setInt(1, userId);
+                ps2.setString(2, "deposit");
+                ps2.setDouble(3, amount);
+                ps2.executeUpdate();
+
+                con.commit(); // Optional: Commit transaction
                 JOptionPane.showMessageDialog(this, "Deposited ₱" + amount);
             }
 
@@ -184,6 +233,7 @@ public class ATMMenu extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
         }
 
+
     }//GEN-LAST:event_btnDepositActionPerformed
 
     private void btnWithdrawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWithdrawActionPerformed
@@ -191,7 +241,6 @@ public class ATMMenu extends javax.swing.JFrame {
        String amtStr = JOptionPane.showInputDialog(this, "Enter withdraw amount:");
 
         if (amtStr == null) {
-            // User cancelled the input
             JOptionPane.showMessageDialog(this, "Withdrawal cancelled.");
             return;
         }
@@ -212,7 +261,9 @@ public class ATMMenu extends javax.swing.JFrame {
             }
 
             try (Connection con = DBConnection.connect()) {
-                // Check current balance
+                con.setAutoCommit(false); // Start transaction
+
+                // 1. Check balance
                 PreparedStatement check = con.prepareStatement("SELECT balance FROM accounts WHERE id = ?");
                 check.setInt(1, userId);
                 ResultSet rs = check.executeQuery();
@@ -221,11 +272,22 @@ public class ATMMenu extends javax.swing.JFrame {
                     double balance = rs.getDouble("balance");
 
                     if (balance >= amount) {
-                        // Perform withdrawal
-                        PreparedStatement ps = con.prepareStatement("UPDATE accounts SET balance = balance - ? WHERE id = ?");
-                        ps.setDouble(1, amount);
-                        ps.setInt(2, userId);
-                        ps.executeUpdate();
+                        // 2. Perform withdrawal
+                        PreparedStatement ps1 = con.prepareStatement("UPDATE accounts SET balance = balance - ? WHERE id = ?");
+                        ps1.setDouble(1, amount);
+                        ps1.setInt(2, userId);
+                        ps1.executeUpdate();
+
+                        // 3. Insert into history_logs
+                        PreparedStatement ps2 = con.prepareStatement(
+                            "INSERT INTO history_logs (history_acc_id, history_type, history_change_ammount) VALUES (?, ?, ?)"
+                        );
+                        ps2.setInt(1, userId);
+                        ps2.setString(2, "withdraw");
+                        ps2.setDouble(3, amount);
+                        ps2.executeUpdate();
+
+                        con.commit(); // Commit both changes
                         JOptionPane.showMessageDialog(this, "Successfully withdrew ₱" + amount);
                     } else {
                         JOptionPane.showMessageDialog(this, "Insufficient funds.\nYour current balance is ₱" + balance);
@@ -233,13 +295,15 @@ public class ATMMenu extends javax.swing.JFrame {
                 } else {
                     JOptionPane.showMessageDialog(this, "Account not found.");
                 }
+
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Database Error: " + ex.getMessage());
             }
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this, "Invalid input. Please enter a valid number.");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage());
         }
+
 
     }//GEN-LAST:event_btnWithdrawActionPerformed
 
@@ -249,6 +313,38 @@ public class ATMMenu extends javax.swing.JFrame {
         new ATMLogin().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnViewHistoryLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewHistoryLogsActionPerformed
+        try (Connection con = DBConnection.connect()) {
+            String query = "SELECT history_id, history_acc_id, history_type, history_change_ammount, history_date FROM history_logs WHERE history_acc_id = ?";
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, userId); // class field holding current logged-in user's ID
+
+            ResultSet rs = ps.executeQuery();
+
+            String[] columnNames = {"ID", "Type", "Amount", "Date"};
+            DefaultTableModel model = new DefaultTableModel(columnNames, 0);
+
+            while (rs.next()) {
+                int id = rs.getInt("history_id");
+                String type = rs.getString("history_type");
+                double amount = rs.getDouble("history_change_ammount");
+                String date = rs.getString("history_date");
+
+                model.addRow(new Object[]{id, type, amount, date});
+            }
+
+            JTable table = new JTable(model);
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setPreferredSize(new Dimension(600, 300));
+
+            JOptionPane.showMessageDialog(this, scrollPane, "History Logs", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error loading history logs: " + ex.getMessage());
+        }
+
+    }//GEN-LAST:event_btnViewHistoryLogsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -288,7 +384,9 @@ public class ATMMenu extends javax.swing.JFrame {
     private javax.swing.JButton btnCheck;
     private javax.swing.JButton btnDeposit;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnViewHistoryLogs;
     private javax.swing.JButton btnWithdraw;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
 }

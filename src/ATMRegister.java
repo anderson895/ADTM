@@ -3,6 +3,7 @@ import adtm.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
+import java.sql.ResultSet;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -116,28 +117,38 @@ public class ATMRegister extends javax.swing.JFrame {
         String accName = tfAccountName.getText();
         String pin = String.valueOf(pfPin.getPassword());
 
-        // Check if any field is empty
         if (accNo.isEmpty() || accName.isEmpty() || pin.isEmpty()) {
             JOptionPane.showMessageDialog(this, "Fill all fields!", "Missing Data", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         try (Connection con = DBConnection.connect()) {
-            // Insert account into database
-            PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO accounts(account_no, account_name, pin) VALUES (?, ?, ?)");
+
+            // Check if account already exists
+            PreparedStatement check = con.prepareStatement("SELECT * FROM accounts WHERE account_no = ?");
+            check.setString(1, accNo);  // 👈 Don't forget this!
+            ResultSet rs = check.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(this, "Account Number already exists!", "Duplicate Account", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Insert new account
+            PreparedStatement ps = con.prepareStatement("INSERT INTO accounts(account_no, account_name, pin) VALUES (?, ?, ?)");
             ps.setString(1, accNo);
             ps.setString(2, accName);
             ps.setString(3, pin);
             ps.executeUpdate();
 
             JOptionPane.showMessageDialog(this, "Account Registered!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+            new ATMLogin().setVisible(true);
 
-            dispose(); // Close current registration window
-            new ATMLogin().setVisible(true); // Show login window
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, "Error: " + ex.getMessage(), "Database Error", JOptionPane.ERROR_MESSAGE);
         }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
